@@ -1,0 +1,85 @@
+package sample.resources;
+
+import sample.models.User;
+
+public class Params {
+    public static String appName="Second Handers";
+    public static String databaseName=" secondhander";
+    public static String baseDirectoryForDp="../images/dp/";
+    public static String baseDirectoryForDpForCopying="C:\\Users\\CHETHAN K C\\Downloads\\TEAM 23 Second handers (1)\\1nt19cs175,1nt19cs124,1nt19cs188\\secondHanders\\secondHanders\\src\\images\\dp\\";
+    public static String baseDirectoryForDpForCopying2="F:\\java project\\secondHanders\\out\\production\\secondHanders\\images\\dp\\";
+    public static String baseDirectoryForItemImage="../images/posts/";
+    public static String baseDirectoryForItemImageForCopying="F:\\java project\\secondHanders\\src\\images\\posts\\";
+    public static String baseDirectoryForItemImageForCopying2="F:\\java project\\secondHanders\\out\\production\\secondHanders\\images\\posts\\";
+    public static String url = "jdbc:mysql://localhost:3306";
+    public static String urlAfterCreating = "jdbc:mysql://localhost:3306/"+databaseName;
+    public static String USERNAME_FOR_DATABASE = "root";
+    public static String PASSWORD_FOR_DATABASE = "8277151577";
+    public static String CREATE_DATABASE="create database if not exists "+databaseName;
+    public static String CREATE_USER_TABLE="create table if not exists user" +
+            "(id int auto_increment primary key," +
+            "fname varchar(64) not null," +
+            "lname varchar(64) not null," +
+            "username varchar(64) unique not null," +
+            "password varchar(256) not null," +
+            "dp varchar(256)," +
+            "phoneNo bigint not null," +
+            "email varchar(256)," +
+            "address varchar(256) not null," +
+            "dateJoined datetime default now()," +
+            "token varchar(256) not null,"+
+            "totalPost int default 0," +
+            "totalReward int default 0);";
+    public static String CREATE_CATEGORY_TABLE="create table if not exists category(id int auto_increment primary key," +
+            "     categoryName varchar(64) not null unique," +
+            "     categoryAdded datetime default now()," +
+            "     totalItem int default 0);";
+    public static String CREATE_ITEM_TABLE="create table if not exists item(id int auto_increment primary key," +
+            "     itemName varchar(64) not null," +
+            "     itemPrice int not null," +
+            "     itemType int not null," +
+            "     datePosted datetime default now()," +
+            "     isSold BOOLEAN default false," +
+            "     soldTo int," +
+            "     soldInPrice int," +
+            "     itemDescription text not null," +
+            "     postedBy int not null," +
+            "     foreign key(postedBy) references user(id)," +
+            "     foreign key(soldTo) references user(id)," +
+            "     foreign key(itemType) references category(id)," +
+            "     itemPic varchar(256));";
+
+    public static String CREATE_REQUESTS_TABLE="create table if not exists requests(id int auto_increment primary key," +
+            "     onProduct int not null," +
+            "     fromUser int not null," +
+            "     toUser int not null," +
+            "     onDate datetime default now()," +
+            "     isAccepted tinyint default 0," +
+            "     message text not null," +
+            "     priceOffered int not null," +
+            "     foreign key(fromUser) references user(id)," +
+            "     foreign key(toUser) references user(id)," +
+            "     foreign key(onProduct) references item(id));";
+    public static String CREATE_REWARDS_TABLE="create table if not exists rewards(id int primary key auto_increment," +
+            "     onRequest int not null," +
+            "     toUser int not null," +
+            "     onProduct int not null," +
+            "     dateRecieved datetime default now()," +
+            "     amount int not null," +
+            "     redeemed tinyint default 0," +
+            "     foreign key(onRequest) references requests(id)," +
+            "     foreign key(onProduct) references item(id)," +
+            "     foreign key(toUser) references user(id));";
+
+    public static String authFolder="C:\\Users\\CHETHAN K C\\AppData\\Local\\Temp\\Temp1_TEAM 23 Second handers (1).zip\\1nt19cs175,1nt19cs124,1nt19cs188\\secondHanders.zip\\secondHanders\\auth";
+    public static String token;
+    public static String username;
+    public static int userId;
+    public static Boolean loogedIn;
+    public static User currentUser;
+
+    public static int rewardMax=25;
+    public static int rewardMin=2;
+
+    public static String categoryInitial="insert into category(categoryName) values(\"Mobiles\"),(\"Clothes\"),(\"Car\"),(\"Bike\");";
+}
